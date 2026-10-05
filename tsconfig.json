@@ -3,32 +3,27 @@
 		"target": "ES2022",
 		"module": "preserve",
 		"moduleResolution": "bundler",
-		"lib": [
-			"ES2023",
-			"DOM",
-			"DOM.Iterable"
-		],
+		"lib": ["ES2023", "DOM", "DOM.Iterable"],
 		"strict": true,
 		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noFallthroughCasesInSwitch": true,
 		"verbatimModuleSyntax": true,
 		"isolatedModules": true,
+		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
-		"types": [
-			"astro/client",
-			"node"
-		]
+		"types": ["astro/client", "node"]
 	},
 	"include": [
 		"src/**/*",
 		"tests/**/*",
+		"e2e/specs/**/*",
+		"e2e/*.ts",
+		"tools/**/*.ts",
 		"types/**/*.d.ts",
 		"vitest.config.ts"
 	],
-	"exclude": [
-		"node_modules",
-		"dist",
-		".astro"
-	]
+	"exclude": ["node_modules", "dist", ".astro", "e2e/site", "src/client/**/*"]
 }

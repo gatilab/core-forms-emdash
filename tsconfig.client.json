@@ -1,0 +1,23 @@
+{
+	// Browser bundles (src/client → dist/assets/*.js, IIFE, es2019).
+	// Checked on their own so that Node and Astro types are unavailable and
+	// built-ins newer than ES2019 (which esbuild does not polyfill) fail to type-check.
+	// Everything a client entry imports (src/shared/conditions, src/shared/expr) is
+	// checked under these rules too.
+	"compilerOptions": {
+		"target": "ES2019",
+		"module": "preserve",
+		"moduleResolution": "bundler",
+		"lib": ["ES2019", "DOM", "DOM.Iterable"],
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noFallthroughCasesInSwitch": true,
+		"verbatimModuleSyntax": true,
+		"isolatedModules": true,
+		"skipLibCheck": true,
+		"noEmit": true,
+		"types": []
+	},
+	"include": ["src/client/**/*"]
+}

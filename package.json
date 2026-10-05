@@ -1,19 +1,29 @@
 {
   "name": "@gatilab/emdash-core-forms",
-  "version": "0.1.0",
-  "description": "Core Forms for EmDash: HTML-first forms with AJAX and no-JS submission, spam protection, email and webhook actions, and a submissions inbox. Port of the Core Forms WordPress plugin.",
+  "version": "1.0.0-dev.0",
+  "description": "Core Forms for EmDash: a full port of the Core Forms WordPress plugin (forms, smart forms, polls, workflows, analytics, payments and licensing).",
   "type": "module",
   "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./core": "./src/core/index.ts",
+    "./runtime": "./src/runtime.ts",
+    "./site/*": "./src/site/*",
     "./astro": "./src/astro/index.ts",
     "./admin": "./src/admin/index.tsx",
-    "./client": "./src/astro/client.ts",
-    "./styles/form-theme.css": "./src/astro/form-theme.css"
+    "./core": "./src/core/index.ts",
+    "./extend": "./src/server/extensions/public.ts",
+    "./assets/*": "./dist/assets/*",
+    "./styles/form-theme.css": "./dist/assets/form-theme.css",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "core-forms": "./bin/core-forms.mjs"
   },
   "files": [
     "src",
+    "dist/assets",
+    "bin",
     "wordpress",
     "README.md",
     "CHANGELOG.md",
@@ -22,7 +32,8 @@
   ],
   "sideEffects": [
     "**/*.css",
-    "**/*.astro"
+    "**/*.astro",
+    "./src/site/middleware.ts"
   ],
   "keywords": [
     "emdash",
@@ -31,35 +42,64 @@
     "forms",
     "contact-form",
     "submissions",
-    "turnstile",
-    "webhook"
+    "polls",
+    "workflows",
+    "licensing"
   ],
   "author": "Gatilab (https://gatilab.com)",
   "license": "GPL-2.0-or-later",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.client.json",
+    "lint": "eslint --max-warnings=0 .",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit && astro check --root . --tsconfig ./tsconfig.json",
-    "prepublishOnly": "pnpm typecheck && pnpm test"
+    "test:watch": "vitest",
+    "build:assets": "node scripts/build-assets.mjs",
+    "routes:gen": "node scripts/gen-routes.mjs",
+    "routes:check": "node scripts/gen-routes.mjs --check",
+    "check:astro": "astro check --root . --tsconfig ./tsconfig.json",
+    "verify": "pnpm typecheck && pnpm lint && pnpm build:assets && pnpm test && pnpm routes:check && pnpm check:astro",
+    "oracle": "node tools/wp-oracle/run.mjs",
+    "oracle:setup": "node tools/wp-oracle/run.mjs setup",
+    "oracle:all": "node tools/wp-oracle/run.mjs all",
+    "oracle:check": "node tools/wp-oracle/run.mjs check",
+    "e2e": "playwright test -c e2e/playwright.config.ts",
+    "prepack": "pnpm build:assets",
+    "prepublishOnly": "pnpm verify"
   },
   "peerDependencies": {
     "@cloudflare/kumo": "^2.6.0",
     "@phosphor-icons/react": "^2.1.10",
     "astro": ">=6.0.0",
-    "emdash": ">=1.0.0",
+    "emdash": ">=1.1.0",
     "react": ">=19.0.0"
+  },
+  "dependencies": {
+    "domhandler": "^6.0.1",
+    "htmlparser2": "^12.0.0",
+    "zod": "4.5.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@astrojs/react": "^6.0.5",
+    "@axe-core/playwright": "^4.13.0",
     "@cloudflare/kumo": "2.6.0",
+    "@eslint/js": "^10.0.1",
     "@phosphor-icons/react": "^2.1.10",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "astro": "^7.3.2",
     "emdash": "^1.1.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.12.0",
+    "happy-dom": "^20.14.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
     "vitest": "4.1.10"
   },
   "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
