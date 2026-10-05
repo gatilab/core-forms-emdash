@@ -1,0 +1,7 @@
+# Downloaded/derived artefacts: never commit.
+.cache/
+node_modules/
+staged/
+*.zip
+*.sqlite
+*.ht.sqlite
