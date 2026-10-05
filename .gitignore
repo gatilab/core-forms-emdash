@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+.astro/
+*.tsbuildinfo
+.DS_Store
+# read-only copy of the WordPress plugin source used for the port
+.reference/

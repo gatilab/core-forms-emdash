@@ -1,0 +1,66 @@
+{
+  "name": "@gatilab/emdash-core-forms",
+  "version": "0.1.0",
+  "description": "Core Forms for EmDash: HTML-first forms with AJAX and no-JS submission, spam protection, email and webhook actions, and a submissions inbox. Port of the Core Forms WordPress plugin.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./core": "./src/core/index.ts",
+    "./astro": "./src/astro/index.ts",
+    "./admin": "./src/admin/index.tsx",
+    "./client": "./src/astro/client.ts",
+    "./styles/form-theme.css": "./src/astro/form-theme.css"
+  },
+  "files": [
+    "src",
+    "wordpress",
+    "README.md",
+    "CHANGELOG.md",
+    "ROUTES.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css",
+    "**/*.astro"
+  ],
+  "keywords": [
+    "emdash",
+    "emdash-plugin",
+    "astro",
+    "forms",
+    "contact-form",
+    "submissions",
+    "turnstile",
+    "webhook"
+  ],
+  "author": "Gatilab (https://gatilab.com)",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit && astro check --root . --tsconfig ./tsconfig.json",
+    "prepublishOnly": "pnpm typecheck && pnpm test"
+  },
+  "peerDependencies": {
+    "@cloudflare/kumo": "^2.6.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "astro": ">=6.0.0",
+    "emdash": ">=1.0.0",
+    "react": ">=19.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/react": "^6.0.5",
+    "@cloudflare/kumo": "2.6.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "astro": "^7.3.2",
+    "emdash": "^1.1.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "typescript": "^6.0.3",
+    "vitest": "4.1.10"
+  },
+  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
+}

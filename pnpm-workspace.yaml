@@ -1,0 +1,13 @@
+# Build scripts: allow only what tooling needs (strictDepBuilds).
+allowBuilds:
+  esbuild: true
+  workerd: true
+  sharp: false
+
+# Supply-chain hardening: cooldown on brand-new releases (EmDash exempt)
+# and no non-registry transitive sources.
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - emdash
+  - "@emdash-cms/*"
+blockExoticSubdeps: true

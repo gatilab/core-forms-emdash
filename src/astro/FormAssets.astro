@@ -1,0 +1,24 @@
+---
+/**
+ * Styles, the submission script and CAPTCHA loaders for rendered forms.
+ * Safe to include more than once; Astro bundles the script and CSS once.
+ */
+import "./forms.css";
+import "./form-theme.css";
+
+interface Props {
+	captcha?: { provider: string; siteKey: string }[];
+}
+const { captcha = [] } = Astro.props;
+const providers = new Set(captcha.map((c) => c.provider));
+const recaptchaKey = captcha.find((c) => c.provider === "recaptcha")?.siteKey;
+---
+
+{providers.has("turnstile") && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+{providers.has("hcaptcha") && <script is:inline src="https://js.hcaptcha.com/1/api.js" async defer></script>}
+{recaptchaKey && <script is:inline src={`https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(recaptchaKey)}`} async defer></script>}
+
+<script>
+	import { initCoreForms } from "./client";
+	initCoreForms();
+</script>
