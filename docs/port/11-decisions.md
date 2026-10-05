@@ -400,3 +400,14 @@ Each question has a recommended default. Work proceeds on the default unless Gau
 | U-4 | **Commerce behaviour beyond 4.11.1:** renewal reminder emails before `expires_at`, and auto-expiry of `pending_payment` submissions after N days (they never expire in WP). | Not in this port. Ship parity in Phase 4 and add both later as opt-in settings. |
 | U-5 | **Customer portal profile editing.** In WP only logged-in WordPress users could edit name and billing details. On EmDash, customers sign in with magic links. Should verified portal sessions edit their profile and billing details? | Allow it. Changes are logged as commerce events. |
 | U-6 | **Analytics default for new installs.** WP tracks views, starts, field interactions and abandonments by default (IP hashed daily). Keep it on by default for the public package, or default it off and let sites opt in? | Keep it on (WP parity). Gatilab's imported forms keep their per-form settings either way. |
+
+### Answers (Gaurav, 2026-10-05)
+
+| ID | Answer | Effect |
+|---|---|---|
+| U-1 | **Emailit direct transport** for gatilab.com. | The Gatilab cutover (P1.22) configures the Emailit transport with the sender WordPress uses today. Needs the Emailit API key and sender domain from `~/.env` or Gaurav at cutover. |
+| U-2 | **No store will move.** Commerce stays a product feature for other EmDash users. | Phase 4 still ships the full WP compatibility layer (it serves other sites migrating from Core Forms for WordPress), but nothing needs to be production-ready on gatilab.com or gauravtiwari.org, and legacy-salt continuity (D-163) is only an import option. |
+| U-3 | **Yes**: `@gatilab/emdash-core-forms`, GPL-2.0-or-later, free, 1.0.0 at the Phase 1 gate. | As planned. `npm publish` still waits for Gaurav's go-ahead. |
+| U-4 | Default taken: not in this port. | Renewal reminders and pending-payment expiry are later opt-in features. |
+| U-5 | Default taken: allowed. | Verified portal sessions can edit profile and billing details (DV-68). |
+| U-6 | **On by default**, as in WordPress. | `enable_analytics = 1` default kept (D-121). |
