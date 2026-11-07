@@ -183,4 +183,4 @@ wp eval-file export-core-forms.php > core-forms.json
 
 ## License
 
-GPL-2.0-or-later, like Core Forms for WordPress.
+MIT. See [LICENSE](./LICENSE).

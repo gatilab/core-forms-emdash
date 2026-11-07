@@ -1,6 +1,6 @@
 {
   "name": "@gatilab/emdash-core-forms",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Core Forms for EmDash: HTML-first forms with AJAX and no-JS submission, spam protection, email and webhook actions, and a submissions inbox. Port of the Core Forms WordPress plugin.",
   "type": "module",
   "main": "./src/index.ts",
@@ -35,7 +35,7 @@
     "webhook"
   ],
   "author": "Gatilab (https://gatilab.com)",
-  "license": "GPL-2.0-or-later",
+  "license": "MIT",
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit && astro check --root . --tsconfig ./tsconfig.json",

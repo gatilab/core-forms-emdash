@@ -21,7 +21,7 @@ import type { PluginDescriptor, PluginStorageConfig, ResolvedPlugin, RouteContex
 import { adminRoutes, renderRoute, submitRoute } from "./routes.js";
 
 export const PLUGIN_ID = "core-forms";
-export const PLUGIN_VERSION = "0.1.0";
+export const PLUGIN_VERSION = "0.1.1";
 export const PACKAGE_NAME = "@gatilab/emdash-core-forms";
 
 export type CoreFormsOptions = Record<string, never>;

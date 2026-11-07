@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (2026-11-07)
+
+- Relicensed under the MIT License (previously GPL-2.0-or-later).
+
 ## 0.1.0 (unreleased)
 
 First release: an EmDash port of Core Forms for WordPress.
