@@ -21,7 +21,7 @@ import type { PluginDescriptor, PluginStorageConfig, ResolvedPlugin, RouteContex
 import { adminRoutes, renderRoute, submitRoute } from "./routes.js";
 
 export const PLUGIN_ID = "core-forms";
-export const PLUGIN_VERSION = "0.1.1";
+export const PLUGIN_VERSION = "0.1.2";
 export const PACKAGE_NAME = "@gatilab/emdash-core-forms";
 
 export type CoreFormsOptions = Record<string, never>;
@@ -39,10 +39,13 @@ export function coreForms(options: CoreFormsOptions = {}): PluginDescriptor<Core
 	};
 }
 
+// `slug` is a plain index, never a unique one. EmDash builds a unique index over
+// the whole shared `_plugin_storage` table as (plugin_id, collection, $.slug),
+// so it would also reject repeated `slug` values in every other plugin's
+// collections. Form slugs are kept unique in code by `uniqueSlug()` in routes.ts.
 export const STORAGE: PluginStorageConfig = {
 	forms: {
-		indexes: ["status", "updatedAt"],
-		uniqueIndexes: ["slug"],
+		indexes: ["status", "updatedAt", "slug"],
 	},
 	submissions: {
 		indexes: ["formId", "status", "submittedAt", ["formId", "submittedAt"], ["status", "submittedAt"], ["formId", "status"]],

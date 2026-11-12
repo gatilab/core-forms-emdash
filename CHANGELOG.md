@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2026-11-12)
+
+- Fixed: the unique index on a form's `slug` also applied to every other plugin's stored records, because EmDash builds unique indexes over the shared plugin storage table. With Core Forms installed, another plugin could save only 1 record per `slug` value in a collection. Link Manager, for example, kept 1 click record per link. The index is now a plain one, and EmDash removes the old unique index when the plugin updates. Form slugs stay unique: the save, duplicate and import routes already check them.
+
 ## 0.1.1 (2026-11-07)
 
 - Relicensed under the MIT License (previously GPL-2.0-or-later).

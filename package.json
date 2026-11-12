@@ -1,6 +1,6 @@
 {
   "name": "@gatilab/emdash-core-forms",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Core Forms for EmDash: HTML-first forms with AJAX and no-JS submission, spam protection, email and webhook actions, and a submissions inbox. Port of the Core Forms WordPress plugin.",
   "type": "module",
   "main": "./src/index.ts",
